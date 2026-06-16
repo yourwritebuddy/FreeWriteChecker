@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WriteBuddy - Grammar Checker</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        p.subtitle {
+            color: #7f8c8d;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 12px;
+            box-sizing: border-box;
+            border: 2px solid #bdc3c7;
+            border-radius: 4px;
+            font-size: 16px;
+            resize: vertical;
+            margin-bottom: 20px;
+        }
+        textarea:focus {
+            border-color: #0070f3;
+            outline: none;
+        }
+        .result-box {
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 15px;
+            line-height: 1.5;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+        }
+        .status-clean {
+            background: #f0fdf4;
+            border-color: #bbf7d0;
+            color: #166534;
+        }
+        .status-issue {
+            background: #fef2f2;
+            border-color: #fca5a5;
+            color: #991b1b;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 25px;
+            color: #7f8c8d;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .back-link:hover {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Grammar & Style Scan</h1>
+    <p class="subtitle">Instantly scan your text draft for mechanical structural slips.</p>
+    
+    <textarea id="textInput" placeholder="Paste your prose composition here to check structure patterns..."></textarea>
+
+    <h2>Scan Diagnostics</h2>
+    <div id="displayResults" class="result-box">
+        System idling. Input text layout above to initialize diagnostic tracking loops.
+    </div>
+
+    <a href="index.html" class="back-link">← Back to Dashboard</a>
+</div>
+
+<script>
+    const textInput = document.getElementById('textInput');
+    const displayResults = document.getElementById('displayResults');
+
+    textInput.addEventListener('input', () => {
+        const text = textInput.value;
+
+        if (text.trim().length === 0) {
+            displayResults.className = "result-box";
+            displayResults.textContent = "System idling. Input text layout above to initialize diagnostic tracking loops.";
+            return;
+        }
+
+        // Checking basic stylistic grammar patterns via RegEx rules
+        if (/\b(i|they|we|you)\s+has\b/i.test(text) || /\b(he|she|it)\s+have\b/i.test(text)) {
+            displayResults.className = "result-box status-issue";
+            displayResults.textContent = "⚠️ Subject-Verb Agreement warning detected. Verify if plural subjects are accurately paired with corresponding action targets (e.g., 'he has' instead of 'he have').";
+        } else if (/\b(everyday)\s+(built|runs|works|is|go)\b/i.test(text)) {
+            displayResults.className = "result-box status-issue";
+            displayResults.textContent = "⚠️ Adverbial spacing mismatch: 'Everyday' is an adjective meaning commonplace. Use the double-word split 'every day' when expressing an active sequence of recurring dates.";
+        } else {
+            displayResults.className = "result-box status-clean";
+            displayResults.textContent = "✓ Contextual patterns analyze clean. No immediate mechanical or syntax errors flagged within the current prose sequence.";
+        }
+    });
+</script>
+
+</body>
+</html>
