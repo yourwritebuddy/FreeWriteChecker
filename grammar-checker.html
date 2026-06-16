@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WriteBuddy - Grammar Checker</title>
+    <title>WriteBuddy - Grammar Checker & Improver</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -30,7 +30,7 @@
         }
         textarea {
             width: 100%;
-            height: 200px;
+            height: 180px;
             padding: 12px;
             box-sizing: border-box;
             border: 2px solid #bdc3c7;
@@ -43,6 +43,18 @@
             border-color: #0070f3;
             outline: none;
         }
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        h2 {
+            margin: 0;
+            font-size: 20px;
+            color: #2c3e50;
+        }
         .result-box {
             padding: 15px;
             border-radius: 6px;
@@ -50,40 +62,65 @@
             line-height: 1.5;
             background: #f8fafc;
             border: 1px solid #e2e8f0;
+            min-height: 50px;
         }
-        .status-clean {
+        .improved-box {
             background: #f0fdf4;
-            border-color: #bbf7d0;
+            border: 1px solid #bbf7d0;
             color: #166534;
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 16px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            min-height: 80px;
         }
-        .status-issue {
-            background: #fef2f2;
-            border-color: #fca5a5;
-            color: #991b1b;
+        .status-clean { background: #f0fdf4; border-color: #bbf7d0; color: #166534; }
+        .status-issue { background: #fef2f2; border-color: #fca5a5; color: #991b1b; }
+        
+        .btn-copy {
+            background-color: #0070f3;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            font-size: 13px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-copy:hover {
+            background-color: #0051b3;
         }
         .back-link {
             display: inline-block;
-            margin-top: 25px;
+            margin-top: 30px;
             color: #7f8c8d;
             text-decoration: none;
             font-size: 14px;
         }
-        .back-link:hover {
-            color: #333;
-        }
+        .back-link:hover { color: #333; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Grammar & Style Scan</h1>
-    <p class="subtitle">Instantly scan your text draft for mechanical structural slips.</p>
+    <h1>Grammar Checker & Improver</h1>
+    <p class="subtitle">Scan your drafting patterns and instantly review a cleaned-up version of your text.</p>
     
-    <textarea id="textInput" placeholder="Paste your prose composition here to check structure patterns..."></textarea>
+    <textarea id="textInput" placeholder="Paste your text here to check and improve structure..."></textarea>
 
     <h2>Scan Diagnostics</h2>
-    <div id="displayResults" class="result-box">
-        System idling. Input text layout above to initialize diagnostic tracking loops.
+    <div id="displayResults" class="result-box" style="margin-bottom: 25px;">
+        System idling. Input text above to initialize diagnostic tracking loops.
+    </div>
+
+    <div class="section-header">
+        <h2>Improved Text Version</h2>
+        <button id="copyBtn" class="btn-copy" style="display: none;">Copy Improved Text</button>
+    </div>
+    <div id="improvedOutput" class="improved-box">
+        Your upgraded, polished phrasing will generate here automatically...
     </div>
 
     <a href="index.html" class="back-link">← Back to Dashboard</a>
@@ -92,27 +129,66 @@
 <script>
     const textInput = document.getElementById('textInput');
     const displayResults = document.getElementById('displayResults');
+    const improvedOutput = document.getElementById('improvedOutput');
+    const copyBtn = document.getElementById('copyBtn');
 
     textInput.addEventListener('input', () => {
-        const text = textInput.value;
+        let text = textInput.value;
 
         if (text.trim().length === 0) {
             displayResults.className = "result-box";
-            displayResults.textContent = "System idling. Input text layout above to initialize diagnostic tracking loops.";
+            displayResults.textContent = "System idling. Input text above to initialize diagnostic tracking loops.";
+            improvedOutput.textContent = "Your upgraded, polished phrasing will generate here automatically...";
+            copyBtn.style.display = "none";
             return;
         }
 
-        // Checking basic stylistic grammar patterns via RegEx rules
-        if (/\b(i|they|we|you)\s+has\b/i.test(text) || /\b(he|she|it)\s+have\b/i.test(text)) {
+        let improvedText = text;
+        let issueFound = false;
+        let diagnosticMsg = "✓ Contextual patterns analyze clean. No immediate mechanical or syntax errors flagged within the current prose sequence.";
+
+        // Check 1: Subject-Verb Agreement (e.g., he have -> he has)
+        if (/\b(he|she|it)\s+have\b/i.test(text)) {
+            diagnosticMsg = "⚠️ Subject-Verb Agreement warning detected. Plural action paired with singular pronoun target.";
+            improvedText = improvedText.replace(/\b(he|she|it)\s+have\b/ig, (match, p1) => p1 + " has");
+            issueFound = true;
+        } 
+        else if (/\b(i|they|we|you)\s+has\b/i.test(text)) {
+            diagnosticMsg = "⚠️ Subject-Verb Agreement warning detected. Singular action paired with plural pronoun target.";
+            improvedText = improvedText.replace(/\b(i|they|we|you)\s+has\b/ig, (match, p1) => p1 + " have");
+            issueFound = true;
+        }
+
+        // Check 2: Everyday vs Every day spacing
+        if (/\b(everyday)\s+(built|runs|works|is|go|happen)\b/i.test(text)) {
+            diagnosticMsg = "⚠️ Adverbial spacing mismatch: Use the split expression 'every day' for recurring actions.";
+            improvedText = improvedText.replace(/\beveryday\b/ig, "every day");
+            issueFound = true;
+        }
+
+        // Update Diagnostic Box Styles
+        if (issueFound) {
             displayResults.className = "result-box status-issue";
-            displayResults.textContent = "⚠️ Subject-Verb Agreement warning detected. Verify if plural subjects are accurately paired with corresponding action targets (e.g., 'he has' instead of 'he have').";
-        } else if (/\b(everyday)\s+(built|runs|works|is|go)\b/i.test(text)) {
-            displayResults.className = "result-box status-issue";
-            displayResults.textContent = "⚠️ Adverbial spacing mismatch: 'Everyday' is an adjective meaning commonplace. Use the double-word split 'every day' when expressing an active sequence of recurring dates.";
+            displayResults.textContent = diagnosticMsg;
         } else {
             displayResults.className = "result-box status-clean";
-            displayResults.textContent = "✓ Contextual patterns analyze clean. No immediate mechanical or syntax errors flagged within the current prose sequence.";
+            displayResults.textContent = diagnosticMsg;
         }
+
+        // Display Improved Output
+        improvedOutput.textContent = improvedText;
+        copyBtn.style.display = "inline-block";
+        copyBtn.textContent = "Copy Improved Text";
+    });
+
+    // Copy to clipboard mechanism
+    copyBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(improvedOutput.textContent).then(() => {
+            copyBtn.textContent = "✓ Copied!";
+            setTimeout(() => {
+                copyBtn.textContent = "Copy Improved Text";
+            }, 2000);
+        });
     });
 </script>
 
