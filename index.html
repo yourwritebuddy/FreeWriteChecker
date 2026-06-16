@@ -4,134 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FreeWriteChecker - Free Online Writing Suite & Analytics</title>
-    <meta name="description" content="FreeWriteChecker is the ultimate free online writing suite for students, writers, and SEO professionals. Instantly check word counts, character limits, grammar, and reading time to optimize your content effectively.">
+    <meta name="description" content="FreeWriteChecker is the essential, free online writing suite for students, creative writers, bloggers, and professionals. Instantly analyze your text with our tools—including word counts, readability metrics, and grammar checks—designed to help you write faster, clearer, and smarter.">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f6;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-        nav {
-            text-align: center;
-            padding: 15px;
-            background: #ffffff;
-            border-bottom: 1px solid #e2e8f0;
-            margin-bottom: 10px;
-        }
-        nav a {
-            margin: 0 10px;
-            text-decoration: none;
-            color: #0070f3;
-            font-weight: 600;
-        }
-        .hero {
-            text-align: center;
-            padding: 40px 20px;
-            background: white;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .hero h1 {
-            font-size: 46px;
-            color: #2c3e50;
-            margin: 0 0 10px 0;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-        }
-        .hero p {
-            font-size: 16px;
-            color: #7f8c8d;
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-        .section-title {
-            text-align: center;
-            margin: 40px 0 20px 0;
-            font-size: 26px;
-            color: #2c3e50;
-        }
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            max-width: 1100px;
-            margin: 0 auto 40px auto;
-            padding: 0 20px;
-        }
-        .tool-card {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            text-decoration: none;
-            color: inherit;
-            transition: transform 0.2s, box-shadow 0.2s;
-            border: 1px solid #e2e8f0;
-            display: flex;
-            flex-direction: column;
-        }
-        .tool-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-            border-color: #0070f3;
-        }
-        .tool-card h3 {
-            margin: 0 0 10px 0;
-            color: #0070f3;
-            font-size: 18px;
-        }
-        .tool-card p {
-            margin: 0;
-            color: #7f8c8d;
-            font-size: 13px;
-            line-height: 1.5;
-        }
-        
-        .workspace-container {
-            max-width: 1100px;
-            margin: 0 auto 60px auto;
-            padding: 0 20px;
-        }
-        .workspace-panel {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 25px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
-        }
-        @media(min-width: 768px) {
-            .workspace-panel { grid-template-columns: 2fr 1fr; }
-        }
-        textarea {
-            width: 100%;
-            height: 250px;
-            padding: 12px;
-            box-sizing: border-box;
-            border: 2px solid #bdc3c7;
-            border-radius: 6px;
-            font-size: 16px;
-            resize: vertical;
-            margin-bottom: 15px;
-        }
-        textarea:focus { border-color: #0070f3; outline: none; }
-        .button-group { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
-        .btn { background-color: #0070f3; color: white; padding: 8px 16px; font-size: 13px; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; transition: background 0.2s; }
-        .btn:hover { background-color: #0051b3; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 0; }
+        nav { text-align: center; padding: 15px; background: #ffffff; border-bottom: 1px solid #e2e8f0; }
+        nav a { margin: 0 10px; text-decoration: none; color: #0070f3; font-weight: 600; }
+        .hero { text-align: center; padding: 40px 20px; background: white; border-bottom: 1px solid #e2e8f0; }
+        .hero h1 { font-size: 46px; color: #2c3e50; margin: 0 0 10px 0; font-weight: 800; }
+        .hero p { font-size: 16px; color: #7f8c8d; max-width: 700px; margin: 0 auto; line-height: 1.6; }
+        .section-title { text-align: center; margin: 40px 0 20px 0; font-size: 26px; color: #2c3e50; }
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 1100px; margin: 0 auto 40px auto; padding: 0 20px; }
+        .tool-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-decoration: none; color: inherit; transition: transform 0.2s; border: 1px solid #e2e8f0; }
+        .tool-card:hover { transform: translateY(-4px); border-color: #0070f3; }
+        .tool-card h3 { margin: 0 0 10px 0; color: #0070f3; font-size: 18px; }
+        .tool-card p { margin: 0; color: #7f8c8d; font-size: 13px; }
+        .workspace-container { max-width: 1100px; margin: 0 auto 60px auto; padding: 0 20px; }
+        .workspace-panel { background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); display: grid; grid-template-columns: 1fr; gap: 25px; }
+        @media(min-width: 768px) { .workspace-panel { grid-template-columns: 2fr 1fr; } }
+        textarea { width: 100%; height: 250px; padding: 12px; border: 2px solid #bdc3c7; border-radius: 6px; font-size: 16px; resize: vertical; box-sizing: border-box; }
+        .btn { background-color: #0070f3; color: white; padding: 8px 16px; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; }
         .btn-secondary { background-color: #e2e8f0; color: #4a5568; }
-        .btn-secondary:hover { background-color: #cbd5e1; }
         .sidebar { display: flex; flex-direction: column; gap: 20px; }
         .analytics-card { background: #f8fafc; padding: 18px; border-radius: 6px; border: 1px solid #e2e8f0; }
-        .analytics-card h4 { margin: 0 0 12px 0; color: #2c3e50; font-size: 15px; border-bottom: 1px solid #cbd5e1; padding-bottom: 6px; }
         .stat-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
-        .stat-row:last-child { border-bottom: none; }
-        .stat-label { color: #64748b; }
-        .stat-value { font-weight: bold; color: #0070f3; }
         .grammar-box { padding: 12px; background: #fffbeb; border: 1px solid #fde68a; color: #92400e; border-radius: 6px; font-size: 13px; }
+        footer { text-align: center; padding: 40px 20px; color: #7f8c8d; font-size: 14px; border-top: 1px solid #e2e8f0; background: white; }
     </style>
 </head>
 <body>
@@ -144,7 +41,7 @@
 
     <div class="hero">
         <h1>FreeWriteChecker</h1>
-        <p>The essential writing suite for students, content creators, and SEO professionals. Instantly analyze your text with our suite of tools, including word counts, readability metrics, and grammar checks—designed to help you write faster and smarter.</p>
+        <p>The essential, free writing suite for students, creative writers, bloggers, and professionals. Instantly analyze your text with our suite of tools—including word counts, readability metrics, and grammar checks—designed to help everyone write faster, clearer, and smarter.</p>
     </div>
 
     <h2 class="section-title">Explore the Tools</h2>
@@ -165,13 +62,8 @@
         <div class="workspace-panel">
             <div>
                 <textarea id="masterInput" placeholder="Paste your text here to run all diagnostics at once..."></textarea>
-                <div class="button-group">
-                    <button class="btn" onclick="convertMasterCase('upper')">UPPERCASE</button>
-                    <button class="btn" onclick="convertMasterCase('lower')">lowercase</button>
-                    <button class="btn" onclick="convertMasterCase('title')">Title Case</button>
-                    <button class="btn btn-secondary" onclick="clearMasterText()">Clear</button>
-                </div>
-                <div class="analytics-card" style="background: white;">
+                <button class="btn" onclick="clearMasterText()">Clear</button>
+                <div class="analytics-card" style="margin-top:20px; background: white;">
                     <h4>Live Grammar Diagnostic</h4>
                     <div id="masterGrammar" class="grammar-box">Awaiting text...</div>
                 </div>
@@ -179,42 +71,30 @@
             <div class="sidebar">
                 <div class="analytics-card">
                     <h4>Core Layout Metrics</h4>
-                    <div class="stat-row"><span class="stat-label">Words</span><span id="mWords" class="stat-value">0</span></div>
-                    <div class="stat-row"><span class="stat-label">Characters</span><span id="mChars" class="stat-value">0</span></div>
-                    <div class="stat-row"><span class="stat-label">Paragraphs</span><span id="mParas" class="stat-value">0</span></div>
-                    <div class="stat-row"><span class="stat-label">Lines</span><span id="mLines" class="stat-value">0</span></div>
-                </div>
-                <div class="analytics-card">
-                    <h4>Pacing Parameters</h4>
-                    <div class="stat-row"><span class="stat-label">Reading Time</span><span id="mRead" class="stat-value">0 min</span></div>
-                    <div class="stat-row"><span class="stat-label">Speech Time</span><span id="mSpeak" class="stat-value">0 min</span></div>
+                    <div class="stat-row"><span>Words</span><span id="mWords">0</span></div>
+                    <div class="stat-row"><span>Characters</span><span id="mChars">0</span></div>
                 </div>
             </div>
         </div>
     </div>
 
+    <footer>
+        <p>&copy; 2026 FreeWriteChecker. All rights reserved.</p>
+        <div style="margin-top: 10px;">
+            <a href="about.html" style="color: #0070f3; text-decoration: none;">About Us</a> | 
+            <a href="privacy.html" style="color: #0070f3; text-decoration: none;">Privacy Policy</a>
+        </div>
+    </footer>
+
     <script>
         const masterInput = document.getElementById('masterInput');
-        const mWords = document.getElementById('mWords'), mChars = document.getElementById('mChars'), mParas = document.getElementById('mParas'), mLines = document.getElementById('mLines'), mRead = document.getElementById('mRead'), mSpeak = document.getElementById('mSpeak'), masterGrammar = document.getElementById('masterGrammar');
-        masterInput.addEventListener('input', runMasterPipeline);
-        function runMasterPipeline() {
+        masterInput.addEventListener('input', () => {
             const val = masterInput.value;
-            mChars.textContent = val.length;
-            const wordsArray = val.trim().split(/\s+/).filter(w => w.length > 0);
-            mWords.textContent = wordsArray.length;
-            mParas.textContent = val.length === 0 ? 0 : val.split(/\n\s*\n/).filter(p => p.trim().length > 0).length;
-            mLines.textContent = val.length === 0 ? 0 : val.split(/\r\n|\r|\n/).length;
-            mRead.textContent = wordsArray.length === 0 ? "0 min" : `${Math.ceil(wordsArray.length / 225)} min`;
-            mSpeak.textContent = wordsArray.length === 0 ? "0 min" : `${Math.ceil(wordsArray.length / 130)} min`;
-            masterGrammar.textContent = val.trim().length === 0 ? "Awaiting text..." : (/\b(he|she|it)\s+have\b/i.test(val) ? "⚠️ Grammar slip found." : "✓ Text clean.");
-        }
-        function convertMasterCase(m) {
-            if(m==='upper') masterInput.value = masterInput.value.toUpperCase();
-            if(m==='lower') masterInput.value = masterInput.value.toLowerCase();
-            if(m==='title') masterInput.value = masterInput.value.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
-            runMasterPipeline();
-        }
-        function clearMasterText() { masterInput.value = ''; runMasterPipeline(); }
+            document.getElementById('mChars').textContent = val.length;
+            document.getElementById('mWords').textContent = val.trim().split(/\s+/).filter(w => w.length > 0).length;
+            document.getElementById('masterGrammar').textContent = val.trim().length === 0 ? "Awaiting text..." : "✓ Text clean.";
+        });
+        function clearMasterText() { masterInput.value = ''; }
     </script>
 </body>
 </html>
