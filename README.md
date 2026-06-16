@@ -1,4 +1,4 @@
-YourWriteBuddy
+FreeWriteChecker
 
 Free online writing tools for students, writers, bloggers, and professionals.
 
