@@ -14,4 +14,4 @@ Tools
 - Keyword Density Checker
 - Grammar Checker
 
-Website: https://freewritechecker.github.io
+Website: yourwritebuddy.github.io/FreeWriteChecker/
