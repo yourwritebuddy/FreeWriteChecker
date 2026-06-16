@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WriteBuddy - Free Online Writing Tools</title>
+    <title>WriteBuddy - Free Online Writing Suite</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -39,15 +39,15 @@
         }
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
             max-width: 1100px;
-            margin: 0 auto 60px auto;
+            margin: 0 auto 40px auto;
             padding: 0 20px;
         }
         .tool-card {
             background: white;
-            padding: 25px;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             text-decoration: none;
@@ -62,28 +62,64 @@
             box-shadow: 0 10px 15px rgba(0,0,0,0.1);
             border-color: #0070f3;
         }
-        .featured-card {
-            background: linear-gradient(135deg, #0070f3 0%, #0051b3 100%);
-            color: white;
-            border: none;
-        }
-        .featured-card h3 {
-            color: white !important;
-        }
-        .featured-card p {
-            color: #e2e8f0 !important;
-        }
         .tool-card h3 {
-            margin: 0 0 12px 0;
+            margin: 0 0 10px 0;
             color: #0070f3;
-            font-size: 20px;
+            font-size: 18px;
         }
         .tool-card p {
             margin: 0;
             color: #7f8c8d;
-            font-size: 14px;
+            font-size: 13px;
             line-height: 1.5;
         }
+        
+        /* Master Workspace Layout Style rules */
+        .workspace-container {
+            max-width: 1100px;
+            margin: 0 auto 60px auto;
+            padding: 0 20px;
+        }
+        .workspace-panel {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+        @media(min-width: 768px) {
+            .workspace-panel { grid-template-columns: 2fr 1fr; }
+        }
+        textarea {
+            width: 100%;
+            height: 250px;
+            padding: 12px;
+            box-sizing: border-box;
+            border: 2px solid #bdc3c7;
+            border-radius: 6px;
+            font-size: 16px;
+            resize: vertical;
+            margin-bottom: 15px;
+        }
+        textarea:focus { border-color: #0070f3; outline: none; }
+        .button-group { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+        .btn { background-color: #0070f3; color: white; padding: 8px 16px; font-size: 13px; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; transition: background 0.2s; }
+        .btn:hover { background-color: #0051b3; }
+        .btn-secondary { background-color: #e2e8f0; color: #4a5568; }
+        .btn-secondary:hover { background-color: #cbd5e1; }
+        .sidebar { display: flex; flex-direction: column; gap: 20px; }
+        .analytics-card { background: #f8fafc; padding: 18px; border-radius: 6px; border: 1px solid #e2e8f0; }
+        .analytics-card h4 { margin: 0 0 12px 0; color: #2c3e50; font-size: 15px; border-bottom: 1px solid #cbd5e1; padding-bottom: 6px; }
+        .stat-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
+        .stat-row:last-child { border-bottom: none; }
+        .stat-label { color: #64748b; }
+        .stat-value { font-weight: bold; color: #0070f3; }
+        .density-list { list-style: none; padding: 0; margin: 0; }
+        .density-item { display: flex; justify-content: space-between; padding: 4px 0; font-size: 13px; }
+        .grammar-box { padding: 12px; background: #fffbeb; border: 1px solid #fde68a; color: #92400e; border-radius: 6px; font-size: 13px; }
     </style>
 </head>
 <body>
@@ -91,74 +127,167 @@
     <!-- Heading Section -->
     <div class="hero">
         <h1>Write Faster, Cleaner and Smarter</h1>
-        <p>Free, fast, and secure tools for students, bloggers, and professional writers. Select a single utility below, or launch our complete master dashboard.</p>
+        <p>Free, lightning-fast text processing tools. Choose an isolated single-problem tool below, or use the live master workspace built right into this dashboard page.</p>
     </div>
 
-    <h2 class="section-title">Our Writing Tools</h2>
-    
+    <!-- Section 1: Single Utility Jump Links -->
+    <h2 class="section-title">Isolate a Specific Tool</h2>
     <div class="tools-grid">
-        
-        <!-- MASTER WORKSPACE CARD -->
-        <a href="./workspace.html" class="tool-card featured-card">
-            <h3>🎛️ All-in-One Text Workspace</h3>
-            <p>Analyze everything at once! Check words, grammar, density, layout data, and time metrics on a single screen.</p>
+        <a href="word-counter.html" class="tool-card">
+            <h3>Word Counter →</h3>
+            <p>Focus purely on text length parameters for your essay tracking goals.</p>
         </a>
-
-        <!-- 1. Word Counter -->
-        <a href="./word-counter.html" class="tool-card">
-            <h3>Word Counter</h3>
-            <p>Focus purely on text length to track limits for essays, book manuscripts, or articles.</p>
+        <a href="character-counter.html" class="tool-card">
+            <h3>Character Counter →</h3>
+            <p>Count text units with or without whitespace parameters for social layout boundaries.</p>
         </a>
-
-        <!-- 2. Character Counter -->
-        <a href="./character-counter.html" class="tool-card">
-            <h3>Character Counter</h3>
-            <p>Count exact character spaces. Ideal for strict social media limits and SEO meta descriptions.</p>
+        <a href="reading-time.html" class="tool-card">
+            <h3>Reading Time Calculator →</h3>
+            <p>Determine exact silent reading speeds using standard formatting calculations.</p>
         </a>
-
-        <!-- 3. Reading Time Calculator -->
-        <a href="./reading-time.html" class="tool-card">
-            <h3>Reading Time Calculator</h3>
-            <p>Determine the silent reading duration of your articles or reports based on average word speed rules.</p>
+        <a href="reading-time.html" class="tool-card">
+            <h3>Speech Time Calculator →</h3>
+            <p>Calculate presentation delivery targets and track presentation speech lengths.</p>
         </a>
-
-        <!-- 4. Speech Time Calculator -->
-        <a href="./reading-time.html" class="tool-card">
-            <h3>Speech Time Calculator</h3>
-            <p>Pace your presentation copy, voiceover projects, or spoken public lecture scripts precisely.</p>
+        <a href="case-converter.html" class="tool-card">
+            <h3>Case Converter →</h3>
+            <p>Switch paragraph groups directly to UPPERCASE, lowercase, or Title Case.</p>
         </a>
-
-        <!-- 5. Case Converter -->
-        <a href="./case-converter.html" class="tool-card">
-            <h3>Case Converter</h3>
-            <p>Instantly switch blocks of text between UPPERCASE, lowercase, or neat Title Case configurations.</p>
+        <a href="paragraph-counter.html" class="tool-card">
+            <h3>Paragraph Counter →</h3>
+            <p>Track block paragraphs to analyze structured copywriting elements.</p>
         </a>
-
-        <!-- 6. Paragraph Counter -->
-        <a href="./paragraph-counter.html" class="tool-card">
-            <h3>Paragraph Counter</h3>
-            <p>Count total text paragraph blocks to analyze the structure and layout of your copy drafts.</p>
+        <a href="line-counter.html" class="tool-card">
+            <h3>Line Counter →</h3>
+            <p>Count vertical line breaks instantly—useful for code lists or rhythmic formatting.</p>
         </a>
-
-        <!-- 7. Line Counter -->
-        <a href="./line-counter.html" class="tool-card">
-            <h3>Line Counter</h3>
-            <p>Track precise line breaks. Highly useful for structured lists, poetry spacing, or plain code strings.</p>
+        <a href="keyword-density.html" class="tool-card">
+            <h3>Keyword Density Checker →</h3>
+            <p>Audit phrase usage percentages to identify repetitive writing habits.</p>
         </a>
-
-        <!-- 8. Keyword Density Checker -->
-        <a href="./keyword-density.html" class="tool-card">
-            <h3>Keyword Density Checker</h3>
-            <p>Audit word frequencies to screen for overused phrasing or optimize text keywords.</p>
+        <a href="grammar-checker.html" class="tool-card">
+            <h3>Grammar Checker & Improver →</h3>
+            <p>Isolate structural mechanical slips and grab cleaned text alternatives instantly.</p>
         </a>
-
-        <!-- 9. Grammar Checker & Improver -->
-        <a href="./grammar-checker.html" class="tool-card">
-            <h3>Grammar Checker & Improver</h3>
-            <p>Isolate mechanical text slip-ups, get detailed diagnostics, and copy a corrected version of your text.</p>
-        </a>
-
     </div>
 
+    <!-- Section 2: Integrated Master Workspace Frame -->
+    <h2 class="section-title">🎛️ Ultimate All-in-One Workspace</h2>
+    <div class="workspace-container">
+        <div class="workspace-panel">
+            
+            <!-- Left Panel Workspace Actions -->
+            <div>
+                <textarea id="masterInput" placeholder="Paste structural text sequences here to populate all 9 analytical diagnostics concurrently..."></textarea>
+                <div class="button-group">
+                    <button class="btn" onclick="convertMasterCase('upper')">UPPERCASE</button>
+                    <button class="btn" onclick="convertMasterCase('lower')">lowercase</button>
+                    <button class="btn" onclick="convertMasterCase('title')">Title Case</button>
+                    <button class="btn btn-secondary" onclick="clearMasterText()">Clear Workspace</button>
+                </div>
+                <div class="analytics-card" style="background: white;">
+                    <h4>Live Workspace Grammar Diagnostic</h4>
+                    <div id="masterGrammar" class="grammar-box" style="background: #f8fafc; border-color: #e2e8f0; color: #64748b;">
+                        Awaiting input telemetry stream strings...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel Workspace Metrics Display Side -->
+            <div class="sidebar">
+                <div class="analytics-card">
+                    <h4>Core Layout Metrics</h4>
+                    <div class="stat-row"><span class="stat-label">Word Count</span><span id="mWords" class="stat-value">0</span></div>
+                    <div class="stat-row"><span class="stat-label">Character Count</span><span id="mChars" class="stat-value">0</span></div>
+                    <div class="stat-row"><span class="stat-label">Paragraph Count</span><span id="mParas" class="stat-value">0</span></div>
+                    <div class="stat-row"><span class="stat-label">Line Count</span><span id="mLines" class="stat-value">0</span></div>
+                </div>
+                <div class="analytics-card">
+                    <h4>Pacing Parameters</h4>
+                    <div class="stat-row"><span class="stat-label">Silent Reading Time</span><span id="mRead" class="stat-value">0 min</span></div>
+                    <div class="stat-row"><span class="stat-label">Speech Presentation Time</span><span id="mSpeak" class="stat-value">0 min</span></div>
+                </div>
+                <div class="analytics-card">
+                    <h4>Top Keyword Breakdown</h4>
+                    <ul id="mKeywords" class="density-list">
+                        <li style="color: #94a3b8; font-size: 13px;">Enter text strings...</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Combined Architecture Processing Scripts -->
+    <script>
+        const masterInput = document.getElementById('masterInput');
+        const mWords = document.getElementById('mWords');
+        const mChars = document.getElementById('mChars');
+        const mParas = document.getElementById('mParas');
+        const mLines = document.getElementById('mLines');
+        const mRead = document.getElementById('mRead');
+        const mSpeak = document.getElementById('mSpeak');
+        const mKeywords = document.getElementById('mKeywords');
+        const masterGrammar = document.getElementById('masterGrammar');
+
+        masterInput.addEventListener('input', runMasterPipeline);
+
+        function runMasterPipeline() {
+            const val = masterInput.value;
+            mChars.textContent = val.length;
+
+            const wordsArray = val.trim().split(/\s+/).filter(w => w.length > 0);
+            mWords.textContent = wordsArray.length;
+
+            const paragraphs = val.split(/\n\s*\n/).filter(p => p.trim().length > 0);
+            mParas.textContent = val.length === 0 ? 0 : paragraphs.length;
+
+            const lines = val.split(/\r\n|\r|\n/);
+            mLines.textContent = val.length === 0 ? 0 : lines.length;
+
+            const rMin = Math.ceil(wordsArray.length / 225);
+            mRead.textContent = wordsArray.length === 0 ? "0 min" : `${rMin} min`;
+
+            const sMin = Math.ceil(wordsArray.length / 130);
+            mSpeak.textContent = wordsArray.length === 0 ? "0 min" : `${sMin} min`;
+
+            // Keyword processing tracking rules
+            if (wordsArray.length === 0) {
+                mKeywords.innerHTML = '<li style="color: #94a3b8; font-size: 13px;">Enter text strings...</li>';
+            } else {
+                const stopWords = ['the', 'a', 'to', 'and', 'of', 'in', 'is', 'it', 'you', 'that', 'on', 'for', 'with', 'are', 'this'];
+                const fMap = {};
+                wordsArray.forEach(w => {
+                    let clean = w.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"']/g,"");
+                    if (clean.length > 2 && !stopWords.includes(clean)) {
+                        fMap[clean] = (fMap[clean] || 0) + 1;
+                    }
+                });
+                const sorted = Object.entries(fMap).sort((a,b) => b[1] - a[1]).slice(0, 3);
+                mKeywords.innerHTML = sorted.map(([w, c]) => `<li class="density-item"><span style="text-transform:capitalize;">${w}</span><strong>${c}x</strong></li>`).join('') || '<li style="color: #94a3b8;">Analyzing composition...</li>';
+            }
+
+            // Quick grammar matching rules
+            if (val.trim().length === 0) {
+                masterGrammar.textContent = "Awaiting input telemetry stream strings...";
+                masterGrammar.style.background = "#f8fafc"; masterGrammar.style.borderColor = "#e2e8f0"; masterGrammar.style.color = "#64748b";
+            } else if (/\b(he|she|it)\s+have\b/i.test(val) || /\b(i|they|we|you)\s+has\b/i.test(val)) {
+                masterGrammar.textContent = "⚠️ Found subject-verb agreement slip patterns inside the block.";
+                masterGrammar.style.background = "#fef2f2"; masterGrammar.style.borderColor = "#fca5a5"; masterGrammar.style.color = "#991b1b";
+            } else {
+                masterGrammar.textContent = "✓ Text baseline layout tracking analyzes clean.";
+                masterGrammar.style.background = "#f0fdf4"; masterGrammar.style.borderColor = "#bbf7d0"; masterGrammar.style.color = "#166534";
+            }
+        }
+
+        function convertMasterCase(mode) {
+            let str = masterInput.value;
+            if (mode === 'upper') masterInput.value = str.toUpperCase();
+            if (mode === 'lower') masterInput.value = str.toLowerCase();
+            if (mode === 'title') masterInput.value = str.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+            runMasterPipeline();
+        }
+        function clearMasterText() { masterInput.value = ''; runMasterPipeline(); }
+    </script>
 </body>
 </html>
