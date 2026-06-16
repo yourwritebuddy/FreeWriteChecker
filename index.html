@@ -89,13 +89,37 @@
 
     <script>
         const masterInput = document.getElementById('masterInput');
+        const mWords = document.getElementById('mWords');
+        const mChars = document.getElementById('mChars');
+        const masterGrammar = document.getElementById('masterGrammar');
+
         masterInput.addEventListener('input', () => {
             const val = masterInput.value;
-            document.getElementById('mChars').textContent = val.length;
-            document.getElementById('mWords').textContent = val.trim().split(/\s+/).filter(w => w.length > 0).length;
-            document.getElementById('masterGrammar').textContent = val.trim().length === 0 ? "Awaiting text..." : "✓ Text clean.";
+            
+            // Update metrics
+            mChars.textContent = val.length;
+            mWords.textContent = val.trim().split(/\s+/).filter(w => w.length > 0).length;
+
+            // Improved Grammar Diagnostic Logic
+            if (val.trim().length === 0) {
+                masterGrammar.textContent = "Awaiting text...";
+                masterGrammar.style.color = "#92400e";
+            } else if (/\b(he|she|it)\s+have\b/i.test(val) || /\b(every|each)\s+students?\b/i.test(val) || /\b(sun|moon)\s+shine\b/i.test(val)) {
+                masterGrammar.textContent = "⚠️ Grammar slip found. Please check your subject-verb agreement.";
+                masterGrammar.style.color = "#d97706";
+            } else {
+                masterGrammar.textContent = "✓ Text clean.";
+                masterGrammar.style.color = "#059669";
+            }
         });
-        function clearMasterText() { masterInput.value = ''; }
+
+        function clearMasterText() { 
+            masterInput.value = ''; 
+            masterGrammar.textContent = "Awaiting text...";
+            masterGrammar.style.color = "#92400e";
+            mWords.textContent = 0; 
+            mChars.textContent = 0; 
+        }
     </script>
 </body>
 </html>
