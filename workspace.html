@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WriteBuddy - Ultimate All-in-One Dashboard</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 0; }
+        .hero { text-align: center; padding: 30px 20px; background: white; border-bottom: 1px solid #e2e8f0; }
+        .hero h1 { font-size: 32px; color: #2c3e50; margin: 0 0 5px 0; }
+        .hero p { font-size: 14px; color: #7f8c8d; margin: 0; }
+        .workspace { max-width: 1200px; margin: 25px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr; gap: 20px; }
+        @media(min-width: 768px) { .workspace { grid-template-columns: 2fr 1fr; } }
+        .input-area { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+        textarea { width: 100%; height: 280px; padding: 12px; box-sizing: border-box; border: 2px solid #bdc3c7; border-radius: 6px; font-size: 16px; resize: vertical; margin-bottom: 15px; }
+        textarea:focus { border-color: #0070f3; outline: none; }
+        .button-group { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+        .btn { background-color: #0070f3; color: white; padding: 8px 16px; font-size: 13px; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; }
+        .btn:hover { background-color: #0051b3; }
+        .btn-secondary { background-color: #e2e8f0; color: #4a5568; }
+        .sidebar { display: flex; flex-direction: column; gap: 15px; }
+        .analytics-card { background: white; padding: 18px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+        .analytics-card h3 { margin: 0 0 12px 0; color: #2c3e50; font-size: 16px; border-bottom: 2px solid #f4f7f6; padding-bottom: 6px; }
+        .stat-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f4f7f6; font-size: 14px; }
+        .stat-row:last-child { border-bottom: none; }
+        .stat-label { color: #7f8c8d; }
+        .stat-value { font-weight: bold; color: #0070f3; }
+        .density-list { list-style: none; padding: 0; margin: 0; }
+        .density-item { display: flex; justify-content: space-between; padding: 5px 0; font-size: 13px; }
+        .grammar-box { padding: 12px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; border-radius: 6px; font-size: 13px; }
+        .back-link { display: inline-block; margin-top: 15px; color: #7f8c8d; text-decoration: none; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <h1>All-in-One Analytics Dashboard</h1>
+        <p>Comprehensive real-time reporting data pipeline mapping all tools simultaneously.</p>
+    </div>
+
+    <div class="workspace">
+        <div class="input-area">
+            <textarea id="textInput" placeholder="Paste your text content string here to run complete checks..."></textarea>
+            <div class="button-group">
+                <button class="btn" onclick="convertCase('upper')">UPPERCASE</button>
+                <button class="btn" onclick="convertCase('lower')">lowercase</button>
+                <button class="btn" onclick="convertCase('title')">Title Case</button>
+                <button class="btn btn-secondary" onclick="clearText()">Clear Input</button>
+            </div>
+            <div class="analytics-card" style="box-shadow: none; padding: 0;">
+                <h3>Real-Time Grammar Diagnostic</h3>
+                <div id="grammarStatus" class="grammar-box">Ready to scan typing metrics...</div>
+            </div>
+            <a href="index.html" class="back-link">← Return to Main Page Menu</a>
+        </div>
+
+        <div class="sidebar">
+            <div class="analytics-card">
+                <h3>Core Text Counters</h3>
+                <div class="stat-row"><span class="stat-label">Word Counter</span><span id="wordCount" class="stat-value">0</span></div>
+                <div class="stat-row"><span class="stat-label">Character Counter</span><span id="charCount" class="stat-value">0</span></div>
+                <div class="stat-row"><span class="stat-label">Paragraph Counter</span><span id="paragraphCount" class="stat-value">0</span></div>
+                <div class="stat-row"><span class="stat-label">Line Counter</span><span id="lineCount" class="stat-value">0</span></div>
+            </div>
+            <div class="analytics-card">
+                <h3>Pace Metrics</h3>
+                <div class="stat-row"><span class="stat-label">Reading Time</span><span id="readingTime" class="stat-value">0 min</span></div>
+                <div class="stat-row"><span class="stat-label">Speech Time</span><span id="speakingTime" class="stat-value">0 min</span></div>
+            </div>
+            <div class="analytics-card">
+                <h3>Keyword Breakdown</h3>
+                <ul id="keywordList" class="density-list"><li style="color: #94a3b8; font-size: 13px;">Awaiting textual data stream...</li></ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const textInput = document.getElementById('textInput');
+        const wordCount = document.getElementById('wordCount');
+        const charCount = document.getElementById('charCount');
+        const paragraphCount = document.getElementById('paragraphCount');
+        const lineCount = document.getElementById('lineCount');
+        const readingTime = document.getElementById('readingTime');
+        const speakingTime = document.getElementById('speakingTime');
+        const keywordList = document.getElementById('keywordList');
+        const grammarStatus = document.getElementById('grammarStatus');
+
+        textInput.addEventListener('input', () => {
+            const text = textInput.value;
+            charCount.textContent = text.length;
+            const words = text.trim().split(/\s+/).filter(w => w.length > 0);
+            wordCount.textContent = words.length;
+            const paragraphs = text.split(/\n\s*\n/).filter(p => p.trim().length > 0);
+            paragraphCount.textContent = text.length === 0 ? 0 : paragraphs.length;
+            const lines = text.split(/\r\n|\r|\n/);
+            lineCount.textContent = text.length === 0 ? 0 : lines.length;
+
+            const readMin = Math.ceil(words.length / 225);
+            readingTime.textContent = words.length === 0 ? "0 min" : `${readMin} min`;
+            const speakMin = Math.ceil(words.length / 130);
+            speakingTime.textContent = words.length === 0 ? "0 min" : `${speakMin} min`;
+
+            // Keyword density tracker execution loop
+            if (words.length === 0) {
+                keywordList.innerHTML = '<li style="color: #94a3b8; font-size: 13px;">Awaiting textual data stream...</li>';
+            } else {
+                const stopWords = ['the', 'a', 'to', 'and', 'of', 'in', 'is', 'it', 'you', 'that', 'on', 'for', 'with', 'are'];
+                const freqMap = {};
+                words.forEach(w => {
+                    let word = w.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+                    if (word.length > 2 && !stopWords.includes(word)) freqMap[word] = (freqMap[word] || 0) + 1;
+                });
+                const sorted = Object.entries(freqMap).sort((a, b) => b[1] - a[1]).slice(0, 3);
+                keywordList.innerHTML = sorted.map(([w, c]) => `<li class="density-item"><span style="text-transform:capitalize;">${w}</span><strong>${c}x</strong></li>`).join('') || '<li>Processing keywords...</li>';
+            }
+
+            // Quick pattern checks
+            if (text.trim().length === 0) {
+                grammarStatus.textContent = "Ready to scan typing metrics...";
+                grammarStatus.style.background = "#f0fdf4"; color = "#166534";
+            } else if (/\b(i|they|we|you)\s+has\b/i.test(text) || /\b(he|she|it)\s+have\b/i.test(text)) {
+                grammarStatus.textContent = "⚠️ Discovered Subject-Verb Agreement error rule mismatch patterns.";
+                grammarStatus.style.background = "#fef2f2"; grammarStatus.style.color = "#991b1b";
+            } else {
+                grammarStatus.textContent = "✓ Contextual baseline structures scan clean.";
+                grammarStatus.style.background = "#f0fdf4"; grammarStatus.style.color = "#166534";
+            }
+        });
+
+        function convertCase(m) {
+            let t = textInput.value;
+            if (m === 'upper') textInput.value = t.toUpperCase();
+            if (m === 'lower') textInput.value = t.toLowerCase();
+            if (m === 'title') textInput.value = t.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+            textInput.dispatchEvent(new Event('input'));
+        }
+        function clearText() { textInput.value = ''; textInput.dispatchEvent(new Event('input')); }
+    </script>
+</body>
+</html>
